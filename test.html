@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JQuery JSONP</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                $('#zip').on('change', function(){
+                    var zip = $(this).val();
+                    var url = "http://ziptasticapi.com/" + zip + "?callback=?";
+                    $.ajax({
+                        "url": url,
+                        "type": "GET",
+                        "dataType": "json",
+                    })
+                    .done(function(result) {
+                        if(result.city) {
+                            $("#city").val(result.city);
+                        }
+                    });
+                });
+            });
+        </script>
+
+    </head>
+    <body>
+        <label for="zip">ZIP:</label>
+        <input type="text" name="zip" id="zip">
+
+        <label for="city">City:</label>
+        <input type="text" name="city" id="city">
+    </body>
+</html>
